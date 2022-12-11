@@ -4,7 +4,7 @@ This repository contains solution of [AoC 2022](https://adventofcode.com/) in [H
 
 To run these programs you need:
 
-- [GHCi](https://downloads.haskell.org/ghc/latest/docs/users_guide/ghci.html)
+- [GHC](https://downloads.haskell.org/ghc/latest/docs/users_guide/index.html)
 - [cabal](https://www.haskell.org/cabal/)
 
 In order to execute particular solution just run `cabal run` like in next example:
