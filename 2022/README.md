@@ -18,5 +18,11 @@ Where:
 - `dayXX` is the day you want executed.
 - `input.txt` is the input file in format expected by the respective day assignment (e.g. the file you downloaed)
 
+## Disclaimer
+
+This project can be in no way considered as properly coded Haskell. There are a lot of bugs, the naming is
+inconsistent and there are things that are surely against best practices. Also I still don't fully understand
+monadic data types so expect that in a lot of places the `<-` and `>>=` operators will be badly used.
+
 ## License
 This code is licensed under MIT license.
