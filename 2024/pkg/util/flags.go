@@ -81,9 +81,30 @@ func InputMatInt() [][]int {
 
 }
 
+func InputBytes() [][]byte {
+	slc := InputSlice()
+	return ToBytes(slc)
+}
+
+func ToBytes(s []string) [][]byte {
+	res := make([][]byte, len(s))
+	for k := range s {
+		res[k] = []byte(s[k])
+	}
+	return res
+}
+
 func Abs(i int) int {
 	if i < 0 {
 		return -i
 	}
 	return i
+}
+
+func CopyMat[K any](in [][]K) [][]K {
+	res := make([][]K, len(in))
+	for i := range res {
+		res[i] = append([]K{}, in[i]...)
+	}
+	return res
 }
