@@ -8,14 +8,6 @@ import (
 	"github.com/mijaros/adventofcode/v2024/pkg/util"
 )
 
-func toBytes(s []string) [][]byte {
-	res := make([][]byte, len(s))
-	for k := range s {
-		res[k] = []byte(s[k])
-	}
-	return res
-}
-
 type Direction byte
 
 const (
@@ -165,7 +157,7 @@ func FindLooping(m [][]byte) int {
 }
 
 func main() {
-	mat := toBytes(util.InputSlice())
+	mat := util.InputBytes()
 
 	fmt.Println("Solution")
 	m2, _ := WalkMap(mat)
