@@ -5,6 +5,7 @@ SOURCES=$(patsubst %,%/main.go,$(MY_BINS))
 TARGETS=$(patsubst cmd/%,bin/%,$(MY_BINS))
 TEST_DIRS=$(patsubst cmd/%,inputs/%/,$(MY_BINS))
 TEST_FILES=$(shell find inputs -type f -print)
+ARGS=
 
 all: $(TARGETS)
 
@@ -18,7 +19,7 @@ $(MY_TARGETS): %: bin/% $$(DAY_TARGET)
 
 $(TEST_FILES): $$(patsubst inputs/%/,bin/%,$$(dir $$@))
 	@echo EXECUTING $< with $@
-	$< -iFile $@
+	$< -iFile $@ $(ARGS)
 
 $(TEST_DIRS): inputs/%: bin/%
 
