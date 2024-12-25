@@ -96,15 +96,19 @@ func findAntinodesI(m [][]byte) ([][]byte, int) {
 func main() {
 	antenaMap := util.InputBytes()
 	aMap, num := findAntinodesI(antenaMap)
-	fmt.Println("=== PartI Map ===")
-	for k := range aMap {
-		fmt.Printf("%s \t %s\n", string(aMap[k]), string(antenaMap[k]))
+	if util.Verbose {
+		fmt.Println("=== PartI Map ===")
+		for k := range aMap {
+			fmt.Printf("%s \t %s\n", string(aMap[k]), string(antenaMap[k]))
+		}
 	}
 
 	aMapII, numII := findAntinodesII(antenaMap)
-	fmt.Println("=== PartII Map ===")
-	for k := range aMapII {
-		fmt.Printf("%s \t %s\n", string(aMapII[k]), string(antenaMap[k]))
+	if util.Verbose {
+		fmt.Println("=== PartII Map ===")
+		for k := range aMapII {
+			fmt.Printf("%s \t %s\n", string(aMapII[k]), string(antenaMap[k]))
+		}
 	}
 	fmt.Printf("Number of antinodes is %d\n", num)
 	fmt.Printf("Number of antinodes with harmonics is %d\n", numII)

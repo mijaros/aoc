@@ -159,10 +159,12 @@ func FindLooping(m [][]byte) int {
 func main() {
 	mat := util.InputBytes()
 
-	fmt.Println("Solution")
 	m2, _ := WalkMap(mat)
-	for k := range m2 {
-		fmt.Println(string(m2[k]))
+	if util.Verbose {
+		fmt.Println("Solution")
+		for k := range m2 {
+			fmt.Println(string(m2[k]))
+		}
 	}
 	fmt.Printf("Number of visited places is %d\n", CountPos(m2))
 	fmt.Printf("Number of possible loops is %d\n", FindLooping(mat))

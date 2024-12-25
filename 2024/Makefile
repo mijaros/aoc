@@ -29,7 +29,7 @@ $(TARGETS): bin/%: cmd/%/main.go
 
 
 clean:
-	rm -f bin/*
+	rm -f bin/* *.dot *.png
 
 
 setup_day:
