@@ -9,11 +9,14 @@ import (
 	"strings"
 )
 
-var inFile *string
+var (
+	inFile  *string
+	Verbose bool
+)
 
 func init() {
 	inFile = flag.String("iFile", "", "Ahoj Svete")
-
+	flag.BoolVar(&Verbose, "verbose", false, "Toggle verbose output")
 }
 
 func GetInput() string {
@@ -105,6 +108,20 @@ func CopyMat[K any](in [][]K) [][]K {
 	res := make([][]K, len(in))
 	for i := range res {
 		res[i] = append([]K{}, in[i]...)
+	}
+	return res
+}
+func Last[T any](v []T) *T {
+	if len(v) == 0 {
+		return nil
+	}
+	return &v[len(v)-1]
+}
+
+func Transform[K, V any](in []K, trans func(K) V) []V {
+	res := make([]V, 0, len(in))
+	for _, v := range in {
+		res = append(res, trans(v))
 	}
 	return res
 }

@@ -157,13 +157,15 @@ func findAllXmass(s []string) (int, int) {
 
 		}
 	}
-	fmt.Println("Part I visualisation")
-	for k := range overlay {
-		fmt.Println(string(overlay[k]))
-	}
-	fmt.Println("Part II visualisation")
-	for k := range overlay2 {
-		fmt.Println(string(overlay2[k]))
+	if util.Verbose {
+		fmt.Println("Part I visualisation")
+		for k := range overlay {
+			fmt.Println(string(overlay[k]))
+		}
+		fmt.Println("Part II visualisation")
+		for k := range overlay2 {
+			fmt.Println(string(overlay2[k]))
+		}
 	}
 	return result, resultP2
 }
