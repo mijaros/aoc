@@ -235,7 +235,4 @@ func main() {
 	fmt.Printf("Sum of 2000th secret numbers is %d\n", sum)
 	largestBananas := CalcBestSequence(seedNumbers)
 	fmt.Printf("The biggest number of bananas is %d\n", largestBananas)
-	//	largestBananas := CalcBestSequenceII(seedNumbers)
-	//	fmt.Printf("The biggest number of bananas is %d\n", largestBananas)
-
 }
