@@ -6,6 +6,7 @@ import (
 	"io"
 	"maps"
 	"os"
+	"os/exec"
 	"slices"
 	"strings"
 
@@ -24,7 +25,67 @@ const (
 var (
 	swaps   string
 	outFile string
+	exeDot  bool
 )
+
+type WaitableCloser interface {
+	WaitClose() error
+	GetHandle() io.Writer
+}
+
+type PlainDotFile struct {
+	f *os.File
+}
+
+func NewDotFile(fileName string) (WaitableCloser, error) {
+	f, err := os.Create(fileName)
+	if err != nil {
+		return nil, err
+	}
+
+	pf := &PlainDotFile{f: f}
+	return pf, nil
+}
+
+func (p *PlainDotFile) WaitClose() error {
+	return p.f.Close()
+}
+
+func (p *PlainDotFile) GetHandle() io.Writer {
+	return p.f
+}
+
+type DotTransformingFile struct {
+	command *exec.Cmd
+	sin     io.WriteCloser
+	sout    *os.File
+}
+
+func NewDotTransformer(oFile string) (WaitableCloser, error) {
+	output, err := os.Create(oFile)
+	if err != nil {
+		return nil, err
+	}
+	cmd := exec.Command("dot", "-Tpng")
+	cmd.Stdout = output
+	cmd.Stderr = os.Stderr
+	return &DotTransformingFile{command: cmd, sin: nil, sout: output}, nil
+}
+
+func (d *DotTransformingFile) WaitClose() error {
+	d.sin.Close()
+	fmt.Print("Waiting for command dot to close... ")
+	err := d.command.Wait()
+	d.sout.Close()
+	fmt.Print("Done\n")
+	return err
+}
+
+func (d *DotTransformingFile) GetHandle() io.Writer {
+	d.sin, _ = d.command.StdinPipe()
+	d.command.Start()
+	return d.sin
+}
 
 func (f Function) Apply(left, right bool) bool {
 	switch f {
@@ -163,7 +224,11 @@ func (d *Device) Setup(in []string) {
 }
 
 func NewDevice() *Device {
-	return &Device{gates: make([]*Gate, 0), wiresMap: make(map[string]*Wire), gateMap: make(map[string][]*Gate), revGateMap: make(map[string][]*Gate), inputWires: make(map[string]*Wire)}
+	return &Device{gates: make([]*Gate, 0),
+		wiresMap:   make(map[string]*Wire),
+		gateMap:    make(map[string][]*Gate),
+		revGateMap: make(map[string][]*Gate),
+		inputWires: make(map[string]*Wire)}
 }
 
 func FilterFunc[T any](in []T, functor func(T) bool) []T {
@@ -378,6 +443,7 @@ func (d *Device) BuildDigraph(output io.Writer) {
 func init() {
 	flag.StringVar(&swaps, "swaps", "", "list of swap tuples")
 	flag.StringVar(&outFile, "oFile", "", "output file for dot file")
+	flag.BoolVar(&exeDot, "eDot", false, "Execute dot directly instead of writing dot file")
 }
 
 func (d *Device) PerformSwap(dat string) string {
@@ -409,12 +475,18 @@ func main() {
 	res := dev.BuildNumber()
 
 	fmt.Printf("The number of all Z outptus is %d\n", res)
-	fd, err := os.Create(outFile)
+	var writer WaitableCloser
+	var err error
+	if exeDot {
+		writer, err = NewDotTransformer(outFile)
+	} else {
+		writer, err = NewDotFile(outFile)
+	}
 	if err != nil {
 		panic(err)
 	}
-	defer fd.Close()
+	defer writer.WaitClose()
 	outSring := dev.PerformSwap(swaps)
-	dev.BuildDigraph(fd)
+	dev.BuildDigraph(writer.GetHandle())
 	fmt.Printf("Resulting sequence of swaps is \"%s\"\n", outSring)
 }
