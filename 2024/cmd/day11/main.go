@@ -71,6 +71,10 @@ func blinkTimes(stones []int, count int) map[int]int {
 	return m
 }
 
+func init() {
+	util.SetIdentifier(11)
+}
+
 func main() {
 	stones := InLineInts(util.GetInput())
 	newStones := blinkTimes(stones, 25)

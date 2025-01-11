@@ -80,6 +80,10 @@ func countTokens(matrices [][][]int) int {
 	return res
 }
 
+func init() {
+	util.SetIdentifier(13)
+}
+
 func main() {
 	dat := util.InputSlice()
 	var matrices [][][]int

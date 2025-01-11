@@ -65,6 +65,10 @@ func SolvePartII(in [][]int) int {
 	return res
 }
 
+func init() {
+	util.SetIdentifier(1)
+}
+
 func main() {
 	data := parseInput()
 	r := SolvePartI(data)

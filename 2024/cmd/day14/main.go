@@ -11,6 +11,7 @@ import (
 var num, modulus, reminder, result *int
 
 func init() {
+	util.SetIdentifier(14)
 	num = flag.Int("num", 1000, "Number of pictures to generate")
 	modulus = flag.Int("mod", 0, "Your found modulus")
 	reminder = flag.Int("rem", 0, "your found reminder")

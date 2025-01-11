@@ -156,6 +156,10 @@ func FindLooping(m [][]byte) int {
 	return res
 }
 
+func init() {
+	util.SetIdentifier(6)
+}
+
 func main() {
 	mat := util.InputBytes()
 

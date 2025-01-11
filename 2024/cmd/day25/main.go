@@ -85,6 +85,10 @@ func TryAllKeys(kl []KeyLock) int {
 	return len(fitting)
 }
 
+func init() {
+	util.SetIdentifier(25)
+}
+
 func main() {
 	inp := util.InputSlice()
 	keyLocks := ParseKeyLocks(inp)

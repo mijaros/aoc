@@ -35,6 +35,7 @@ func (h *NodeHeap) Pop() any {
 }
 
 func init() {
+	util.SetIdentifier(18)
 	width = flag.Int("width", 71, "Width of the memory grid")
 	bytes = flag.Int("bytes", 1024, "Number of bytes to fall")
 }

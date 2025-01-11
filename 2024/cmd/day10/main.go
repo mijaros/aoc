@@ -111,6 +111,10 @@ func findTrailsII(mat [][]byte) int {
 	return res
 }
 
+func init() {
+	util.SetIdentifier(10)
+}
+
 func main() {
 	m := util.InputBytes()
 	fmt.Printf("Sum of trail socres is %d\n", findTrails(m))

@@ -56,6 +56,10 @@ func CountSafe(m [][]int) (int, int) {
 	return r1, r2
 }
 
+func init() {
+	util.SetIdentifier(2)
+}
+
 func main() {
 	mat := util.InputMatInt()
 	safe1, safe2 := CountSafe(mat)

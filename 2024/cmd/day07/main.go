@@ -115,6 +115,10 @@ func ParseEquations(lines []string) []Equation {
 	return res
 }
 
+func init() {
+	util.SetIdentifier(7)
+}
+
 func main() {
 	eqString := util.InputSlice()
 	equations := ParseEquations(eqString)

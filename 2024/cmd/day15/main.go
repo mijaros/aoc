@@ -273,6 +273,10 @@ func transFormMapII(in [][]byte) [][]byte {
 	return res
 }
 
+func init() {
+	util.SetIdentifier(15)
+}
+
 func main() {
 	mat := util.InputBytes()
 	matII := util.CopyMat(mat)

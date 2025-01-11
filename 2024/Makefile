@@ -14,7 +14,8 @@ all: $(TARGETS)
 
 $(MY_TARGETS):
 DAY_TARGET=$(wildcard inputs/$@/*)
-$(MY_TARGETS): %: bin/% $$(DAY_TARGET)
+$(MY_TARGETS): %: bin/%
+	$< $(ARGS)
 
 
 $(TEST_FILES): $$(patsubst inputs/%/,bin/%,$$(dir $$@))
@@ -36,8 +37,7 @@ setup_day:
 ifndef DAY_INI
 	$(error VARIABLE DAY_INI not set)
 endif
-	mkdir -p {cmd,inputs}/$(DAY_INI)
-	cp ./main.go.tpl cmd/$(DAY_INI)/main.go
+	bash ./main_gen.sh $(DAY_INI)
 
 
 .PHONY: $(TEST_FILES) all $(MY_TARGETS)

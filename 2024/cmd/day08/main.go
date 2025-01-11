@@ -93,6 +93,10 @@ func findAntinodesI(m [][]byte) ([][]byte, int) {
 	return aNodes, antiNodes
 }
 
+func init() {
+	util.SetIdentifier(8)
+}
+
 func main() {
 	antenaMap := util.InputBytes()
 	aMap, num := findAntinodesI(antenaMap)

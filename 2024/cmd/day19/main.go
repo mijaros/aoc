@@ -35,6 +35,10 @@ func compose(towel string, materials []string) int {
 	return result
 }
 
+func init() {
+	util.SetIdentifier(19)
+}
+
 func main() {
 	input := util.InputSlice()
 	towels := extractTowels(input[0])

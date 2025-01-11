@@ -157,6 +157,10 @@ func BuildResString(clique []*Node) string {
 	return strings.Join(names, ",")
 }
 
+func init() {
+	util.SetIdentifier(23)
+}
+
 func main() {
 	g := BuildGraphFromInput(util.InputSlice())
 	triangles := g.FindTriangles()

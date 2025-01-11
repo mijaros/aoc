@@ -146,6 +146,10 @@ func checkSum(d []int) int {
 	return res
 }
 
+func init() {
+	util.SetIdentifier(9)
+}
+
 func main() {
 	disk, err := toDisk(util.GetInput())
 	if err != nil {

@@ -65,22 +65,25 @@ func BackTrack(paths [][][2]int, b [][]byte) int {
 	return len(visited)
 }
 
-// This is evil function which allows parallels in dijstras execution
-// (see no distances vector) and also redefines what is a vertex
-// In order to distinguish the nodes where turn happened, the vertex definition
-// is extended by it's parent - so basically from the algorithm standpoint,
-// vertex visited from below and from right are two distinct vertices even though
-// it is on the same spot on the map
-// reason being this situation  #.#
-//
-//	..#
-//	#.#
-//
-// where the point in the middle (junction) can have the distance from the beginning
-// 1001 by the left path, and 2001 from the down path - hence the dijsktras algorithm
-// would completely skip the lower path, but the top point has a distance of
-// 2002 nevertheless the path that was taken from the point below (because if the path is
-// from left, there is turn necessary.
+/**
+ * This is evil function which allows parallels in dijstras execution
+ * (see no distances vector) and also redefines what is a vertex
+ * In order to distinguish the nodes where turn happened, the vertex definition
+ * is extended by it's parent - so basically from the algorithm standpoint,
+ * vertex visited from below and from right are two distinct vertices even though
+ * it is on the same spot on the map
+ * reason being this situation
+ *
+ *      #.#
+ *      ..#
+ *      #.#
+ *
+ * where the point in the middle (junction) can have the distance from the beginning
+ * 1001 by the left path, and 2001 from the down path - hence the dijsktras algorithm
+ * would completely skip the lower path, but the top point has a distance of
+ * 2002 nevertheless the path that was taken from the point below (because if the path is
+ * from left, there is turn necessary.
+ */
 func DijkstraWithParallels(b [][]byte, start, end [2]int, distance int) [][][2]int {
 	h, w := len(b), len(b[0])
 	mheap := &graphs.DistHeap{{Vert: graphs.FromPoint(start), Dist: 0, Parents: [][2]int{{start[0], start[1] - 1}}, Visited: make(map[[2]int]bool)}}
@@ -129,6 +132,11 @@ func DijkstraWithParallels(b [][]byte, start, end [2]int, distance int) [][][2]i
 	return result
 
 }
+
+func init() {
+	util.SetIdentifier(16)
+}
+
 func main() {
 	inp := util.InputBytes()
 	dist := graphs.DijkstraSpec(inp)

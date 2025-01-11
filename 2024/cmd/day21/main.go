@@ -373,6 +373,7 @@ var (
 )
 
 func init() {
+	util.SetIdentifier(21)
 	moves = BuildKeypadMap()
 	keyMoves = BuildMovepadMap()
 }

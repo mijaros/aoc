@@ -23,6 +23,9 @@ func GetInput() string {
 	if !flag.Parsed() {
 		flag.Parse()
 	}
+	if *inFile == "" {
+		return GetOfficialInput()
+	}
 	dat, err := os.Open(*inFile)
 	if err != nil {
 		log.Panicf("Couldn't open %s: %s", *inFile, err.Error())

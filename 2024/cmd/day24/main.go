@@ -441,6 +441,7 @@ func (d *Device) BuildDigraph(output io.Writer) {
 }
 
 func init() {
+	util.SetIdentifier(24)
 	flag.StringVar(&swaps, "swaps", "", "list of swap tuples")
 	flag.StringVar(&outFile, "oFile", "", "output file for dot file")
 	flag.BoolVar(&exeDot, "eDot", false, "Execute dot directly instead of writing dot file")

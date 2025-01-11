@@ -135,6 +135,10 @@ func ExtractPrintRules(in []string) [][]int {
 	return result
 }
 
+func init() {
+	util.SetIdentifier(5)
+}
+
 func main() {
 	s := util.InputSlice()
 	n, graph := ExtractOrder(s)

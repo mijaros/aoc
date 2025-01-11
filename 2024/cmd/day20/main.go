@@ -227,6 +227,7 @@ func PartIIBFS(b [][]byte, start, end [2]int, maxCheat int, functor Counter) int
 }
 
 func init() {
+	util.SetIdentifier(20)
 	flag.BoolVar(&debug, "debug", false, "Should run debug counter instead of the real one")
 	flag.IntVar(&maxNo, "minSave", 100, "Filter to be used")
 }

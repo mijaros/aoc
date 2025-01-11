@@ -30,6 +30,7 @@ func NextSecretNumber(in int) int {
 }
 
 func init() {
+	util.SetIdentifier(22)
 	flag.BoolVar(&runTest, "tests", false, "Run only secret generator test")
 }
 

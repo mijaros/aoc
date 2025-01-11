@@ -170,6 +170,10 @@ func findAllXmass(s []string) (int, int) {
 	return result, resultP2
 }
 
+func init() {
+	util.SetIdentifier(4)
+}
+
 func main() {
 	in := util.InputSlice()
 	p1, p2 := findAllXmass(in)

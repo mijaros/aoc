@@ -79,6 +79,10 @@ func ReadMult(s string) (int, int) {
 	return r, r2
 }
 
+func init() {
+	util.SetIdentifier(3)
+}
+
 func main() {
 	in := util.GetInput()
 	partI, partII := ReadMult(in)

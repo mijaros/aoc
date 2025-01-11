@@ -191,6 +191,10 @@ func calcArea(d [][]byte) map[byte]int {
 	return res
 }
 
+func init() {
+	util.SetIdentifier(12)
+}
+
 func main() {
 	dat := util.InputBytes()
 	per := calcPerimeter(dat)
