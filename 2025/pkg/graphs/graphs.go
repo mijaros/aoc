@@ -1,3 +1,25 @@
+// Copyright (c) 2025 Miroslav Jaros
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+// SPDX-License-Identifier: MIT
+
 package graphs
 
 import (
@@ -63,6 +85,23 @@ func GenPoints(p [2]int, x, y int) [][2]int {
 	for k := range s {
 		if s[k][0] >= 0 && s[k][0] < x && s[k][1] >= 0 && s[k][1] < y {
 			r = append(r, s[k])
+		}
+	}
+	return r
+}
+
+func GenPointsDiag(p [2]int, x, y int) [][2]int {
+	var r [][2]int
+	for k := -1; k <= 1; k++ {
+		for j := -1; j <= 1; j++ {
+			sx, sy := p[0]+k, p[1]+j
+			if sx < 0 || sx >= x || sy < 0 || sy >= y {
+				continue
+			}
+			if k == 0 && j == 0 {
+				continue
+			}
+			r = append(r, [2]int{sx, sy})
 		}
 	}
 	return r
