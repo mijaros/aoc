@@ -150,3 +150,11 @@ func Transform[K, V any](in []K, trans func(K) V) []V {
 	}
 	return res
 }
+
+func TransformMat[K, V any](in [][]K, trans func(K) V) [][]V {
+	res := make([][]V, len(in))
+	for i := range in {
+		res[i] = Transform(in[i], trans)
+	}
+	return res
+}
