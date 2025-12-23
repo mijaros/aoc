@@ -111,7 +111,7 @@ the more funny part starts:
 Once the linear subspace is described, based on parameters necessary then the solution switches to the brute-force
 algorithm of trial and error of the combinations. Since the number of solutions is infinite (each parameter lies on 
 $N_0$ because any variable is non-negative whole number) we need some way to figure out the path through the infinite
-linear subspace. I've decided to use 1-norm of the vector, going from vectors with 1-norm equal to 0 (e.g. only vector $(0,0,0)$)
+linear subspace. I've decided to use 1-norm of the vector, going from vectors with 1-norm equal to 0 (e.g. only vector $(0,0,0)$ )
 up to some arbitrary number where all solutions are defined and minimal (in case of my input it was 200). This is
 where the algorithm becomse brute force, for vectors in $Q^3$ with $1$-norm of 200 there is `20301` distinct vectors
 and to try all `1-norm` vectors from $(0,200)$ it needs `4 080 501` vectors to try. This makes this implementation to 
@@ -130,7 +130,7 @@ algorithm finding all paths between nodes in general graph - works for part I - 
 so the recursive implementation for Part II took about 12 hours without solving even the first sub-problem. 
 
 But once you read correctly the hint in the puzzle - [the dag one](https://en.wikipedia.org/wiki/Directed_acyclic_graph) 
-the problem of finding all paths transforms from `NP` to a quadratic one (to be precise $O(V + E)$).
+the problem of finding all paths transforms from `NP` to a quadratic one (to be precise $O(V + E)$ ).
 
 ### Day 12
 
